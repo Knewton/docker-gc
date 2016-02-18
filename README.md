@@ -83,11 +83,11 @@ redis:[^ ]\+
 
 ### Excluding Containers From Garbage Collection
 
-There can also be containers (for example data only containers) which 
-you would like to exclude from garbage collection. To do so, create 
-`/etc/docker-gc-exclude-containers`, or if you want the file to be 
-read from elsewhere, set the `EXCLUDE_CONTAINERS_FROM_GC` environment 
-variable to its location. This file should container name patterns (in 
+There can also be containers (for example data only containers) which
+you would like to exclude from garbage collection. To do so, create
+`/etc/docker-gc-exclude-containers`, or if you want the file to be
+read from elsewhere, set the `EXCLUDE_CONTAINERS_FROM_GC` environment
+variable to its location. This file should container name patterns (in
 the `grep` sense), one per line, such as `mariadb-data`.
 
 An example container excludes file might contain:
@@ -132,8 +132,7 @@ This setting also prevents the removal of images that have been created less tha
 
 ## Running as a Docker Image
 
-A Dockerfile is provided as an alternative to a local installation. By default
-the container will start up, run a single garbage collection, and shut down.
+A Dockerfile is provided as an alternative to a local installation. It will run gc every hour.
 
 #### Building the Docker Image
 The image is currently built with Docker 1.6.2, but to build it against a newer
@@ -155,8 +154,6 @@ The docker-gc container requires access to the docker socket in order to
 function, so you need to map it when running, e.g.:
 
 ```sh
-$ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc
+$ docker run --name docker-gc --rm -v /var/run/docker.sock:/var/run/docker.sock docker.knewton.net/docker-gc
 ```
 
-The `/etc` directory is also mapped so that it can read any exclude files
-that you've created.

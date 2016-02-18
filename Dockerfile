@@ -10,7 +10,10 @@ RUN apk --update add bash curl \
   && rm -rf /var/cache/apk/*
 
 COPY ./docker-gc /docker-gc
+COPY ./docker-gc-every-hour /docker-gc-every-hour
 
 VOLUME /var/lib/docker-gc
 
-CMD ["watch -n 3600 /docker-gc"]
+ENV GRACE_PERIOD_SECONDS 259200
+
+CMD ["/docker-gc-every-hour"]
