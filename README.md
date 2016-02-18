@@ -154,6 +154,6 @@ The docker-gc container requires access to the docker socket in order to
 function, so you need to map it when running, e.g.:
 
 ```sh
-$ docker run --name docker-gc --rm -v /var/run/docker.sock:/var/run/docker.sock docker.knewton.net/docker-gc
+$ docker run --name docker-gc -d -v /var/run/docker.sock:/var/run/docker.sock docker.knewton.net/docker-gc
 ```
 
